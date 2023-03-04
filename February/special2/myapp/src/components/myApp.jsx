@@ -41,7 +41,9 @@ console.log(total)
       <h1>{i}</h1>
        <h1>Calculator :- {x}{operator[i]}{y}</h1>
 
-       <Answer total={total} seti={seti} />
+       <Answer 
+       
+       total={total} seti={seti} />
         {/* <button onClick={handlePlayertwo}>Submit</button> */}
     </div>
   )
