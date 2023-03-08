@@ -15,6 +15,7 @@ export default function Counter() {
 
   return (
     <div>
+      
        <h1>Count value is : {count}</h1>
        <button disabled={count<=0} onClick={handleReduce}>-</button>
        <button  onClick={handleAdd}>+</button>

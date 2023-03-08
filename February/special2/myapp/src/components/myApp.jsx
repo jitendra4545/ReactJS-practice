@@ -42,7 +42,10 @@ console.log(total)
        <h1>Calculator :- {x}{operator[i]}{y}</h1>
 
        <Answer 
-       
+       setplayeroneRight={setplayeroneRight}
+       setplayertwoRight={setplayertwoRight}
+       setplayeroneWrong={setplayeroneWrong}
+       setplayertwoWrong={setplayertwoWrong}
        total={total} seti={seti} />
         {/* <button onClick={handlePlayertwo}>Submit</button> */}
     </div>
