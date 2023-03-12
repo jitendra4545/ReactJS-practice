@@ -1,0 +1,13 @@
+#form{
+    display: grid;
+    width: 10%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+#navbar{
+    display: flex;
+    justify-content: space-around;
+     border: 1px olid red;
+     background-color: pink;
+}
