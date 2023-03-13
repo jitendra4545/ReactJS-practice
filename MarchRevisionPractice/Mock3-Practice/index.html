@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+       <a href="./index.html">Product Page</a>
+       <a href="./wishlist.html">WishList</a> 
+    </nav>
+
+    <button id="prev">PREV</button>
+    <button id="pageBtn"></button>
+    <button id="next">NEXT</button>
+    <div id="container">
+     
+    </div>
+    
+</body>
+</html>
+<script>
+
+const getData=async(page=1)=>{
+    let res=await fetch(`https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-products?limit=12&&page=${page}`)
+    let data=await res.json()
+    let x=data.data
+    console.log(x)
+    appendData(x)
+    document.querySelector('#pageBtn').innerText=page
+}
+getData()
+
+let container=document.querySelector('#container')
+const appendData=(data)=>{
+container.innerHTML=null
+data.forEach((el,index)=>{
+    let div=document.createElement('div')
+
+      let img=document.createElement('img')
+      img.src=el.image
+   img.style.width='90%'
+      let brand=document.createElement("p")
+     brand.innerText=el.brand
+
+     let category=document.createElement("p")
+     category.innerText=el.category
+
+     let price=document.createElement("p")
+     price.innerText=el.price
+
+     let title=document.createElement("h2")
+     title.innerText=el.title
+
+     let btn=document.createElement("button")
+     btn.innerText="WishList"
+     btn.addEventListener('click',()=>{
+        addWishlist()
+     })
+
+     div.append(img,title,brand,category,price,btn)
+     container.append(div)
+})
+
+
+}
+
+let page=1
+
+
+const PrevBtn=()=>{
+page--
+console.log(page)
+getData(page)
+}
+
+document.querySelector("#prev").addEventListener('click',PrevBtn)
+
+
+const NextBtn=()=>{
+    page++
+    console.log(page)
+     getData(page)
+}
+
+document.querySelector("#next").addEventListener('click',NextBtn)
+
+
+
+
+</script>
