@@ -18,9 +18,20 @@
        <a href="./wishlist.html">WishList</a> 
     </nav>
 
+    
+
+    <select name="" id="filter">
+        <option value="">select filtering</option>
+        <option value="kids">kid</option>
+        <option value="women">women</option>
+        <option value="men">men </option>
+    </select>
+
     <button id="prev">PREV</button>
     <button id="pageBtn"></button>
     <button id="next">NEXT</button>
+
+
     <div id="container">
      
     </div>
@@ -35,6 +46,11 @@ const getData=async(page=1)=>{
     let x=data.data
     console.log(x)
     appendData(x)
+    // filtering(x)
+    document.querySelector("#filter").addEventListener('change',()=>{
+        filtering(x)
+    })
+
     document.querySelector('#pageBtn').innerText=page
 }
 getData()
@@ -93,7 +109,23 @@ const NextBtn=()=>{
 
 document.querySelector("#next").addEventListener('click',NextBtn)
 
+function filtering(data){
+    let fi = document.querySelector("#filter").value
+    console.log(fi)
+    let filt  = data.filter((el)=>{
+        
+        return(el.category==fi)
+    })
+    if(fi=="" ){
+        appendData(data)
 
+    }  else{
+
+        appendData(filt)
+    }
+    console.log(filt)
+    
+}
 
 
 </script>
