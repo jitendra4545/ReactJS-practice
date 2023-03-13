@@ -30,6 +30,7 @@ let obj={
 }
 mobileData.push(obj)
 localStorage.setItem("mobile_data",JSON.stringify(mobileData))
+alert('product added successfully')
 }
 
 
