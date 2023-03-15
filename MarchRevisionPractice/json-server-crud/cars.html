@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">
+            <h1>Home Page</h1>
+        </a>
+        <a href="cars.html">
+            <h1>Todo Page</h1>
+        </a>
+        <a href="wishlist.html">
+            <h1>wishlist Page</h1>
+        </a>
+    </nav>
+    <select name="" id="filt" onchange="handleFilt()">
+        <option value=""></option>
+        <option value="false">pending</option>
+        <option value="true">complete</option>
+    </select>
+    <div id="container">
+
+    </div>
+</body>
+
+</html>
+<script>
+    let container = document.getElementById('container')
+
+    let getData = async () => {
+        let res = await fetch(`https://rm-backend.onrender.com/todos`)
+        let data = await res.json()
+
+        console.log(data)
+        displayData(data)
+    }
+    getData()
+
+
+    const displayData = (data) => {
+        container.innerHTML = null
+        data.forEach((el, index) => {
+            let div = document.createElement('div')
+
+            let h1 = document.createElement('h1')
+            h1.innerText = el.name
+
+            let p = document.createElement('p')
+            p.innerText = el.status === "false" ? "pending" : "complete"
+
+            let update = document.createElement('button')
+            update.innerText = "edit"
+            update.addEventListener('click', () => {
+                editData(el,data)
+            })
+
+
+            let wishlist = document.createElement('button')
+            wishlist.innerText = "ADD FAV"
+            wishlist.addEventListener('click', () => {
+                wishlistFunc(el)
+            })
+
+
+            let deleteId = document.createElement('button')
+            deleteId.innerText = "delete"
+            deleteId.addEventListener('click', () => {
+                deleteFunc(el)
+            })
+
+            div.append(h1, p, update, deleteId,wishlist)
+            container.append(div)
+        })
+    }
+
+    const deleteFunc = async (el) => {
+        // console.log(el.id)
+        let res = await fetch(`https://rm-backend.onrender.com/todos/${el.id}`, {
+            method: "DELETE",
+
+        })
+        let data = await res.json()
+        console.log("update", data)
+
+        getData()
+    }
+
+
+
+const editData=async(el)=>{
+console.log(el,"data")
+
+let name = window.prompt()
+
+   let updateData={name:name}
+    let res = await fetch(`https://rm-backend.onrender.com/todos/${el.id}`,{
+        method:"PATCH",
+        
+        body:JSON.stringify(updateData),
+        headers:{
+            "Content-Type":"application/json"
+        }
+        
+    })
+    let data=await res.json()
+    console.log(data)
+    getData()
+}
+
+const wishlistFunc =async(el)=>{
+   let obj = {
+    name:el.name,
+    status:el.status
+   }
+    let res = await fetch(`https://rm-backend.onrender.com/wishlist`,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        }
+        ,
+        body:JSON.stringify(obj)
+    })
+    let data=await res.json()
+    console.log(data)
+}
+
+const handleFilt=async()=>{
+let filt=document.getElementById('filt').value
+    let res=await fetch(`https://rm-backend.onrender.com/todos/?status=${filt}`)
+
+    let data=await res.json()
+    console.log(data)
+}
+
+
+//posts?title=json-server
+</script>

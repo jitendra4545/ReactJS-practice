@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a href="index.html"><h1>Home Page</h1></a>
+        <a href="cars.html"><h1>Todo Page</h1></a>
+        <a href="wishlist.html"><h1>wishlist Page</h1></a>
+    </nav>
+    <form action="">
+        <input id="name" type="text" placeholder="enter name">
+        <select name="" id="status">
+            <option value=""></option>
+            <option value="false">Pending</option>
+            <option value="true">Complete</option>
+        </select>
+        <input type="submit">
+    </form>
+</body>
+</html>
+<script>
+const handleSubmit=async(e)=>{
+    e.preventDefault()
+    let obj={
+        name:document.getElementById('name').value ,
+        status:document.getElementById('status').value
+    }
+
+    console.log(obj)
+    let res = await fetch(`https://rm-backend.onrender.com/todos`,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        }
+        ,
+        body:JSON.stringify(obj)
+    })
+    let data=await res.json()
+    console.log(data)
+
+}
+
+ document.querySelector('form').addEventListener("submit",handleSubmit)
+
+  
+
+
+</script>
