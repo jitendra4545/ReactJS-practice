@@ -25,6 +25,8 @@
         <option value="false">pending</option>
         <option value="true">complete</option>
     </select>
+    <button onclick="handleASC()">ASC</button>
+    <button onclick="handleDESC()">DESC</button>
     <div id="container">
 
     </div>
@@ -58,7 +60,7 @@
             let update = document.createElement('button')
             update.innerText = "edit"
             update.addEventListener('click', () => {
-                editData(el,data)
+                editData(el, data)
             })
 
 
@@ -75,7 +77,7 @@
                 deleteFunc(el)
             })
 
-            div.append(h1, p, update, deleteId,wishlist)
+            div.append(h1, p, update, deleteId, wishlist)
             container.append(div)
         })
     }
@@ -94,51 +96,62 @@
 
 
 
-const editData=async(el)=>{
-console.log(el,"data")
+    const editData = async (el) => {
+        console.log(el, "data")
 
-let name = window.prompt()
+        let name = window.prompt()
 
-   let updateData={name:name}
-    let res = await fetch(`https://rm-backend.onrender.com/todos/${el.id}`,{
-        method:"PATCH",
-        
-        body:JSON.stringify(updateData),
-        headers:{
-            "Content-Type":"application/json"
+        let updateData = { name: name }
+        let res = await fetch(`https://rm-backend.onrender.com/todos/${el.id}`, {
+            method: "PATCH",
+
+            body: JSON.stringify(updateData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+
+        })
+        let data = await res.json()
+        console.log(data)
+        getData()
+    }
+
+    const wishlistFunc = async (el) => {
+        let obj = {
+            name: el.name,
+            status: el.status
         }
-        
-    })
-    let data=await res.json()
-    console.log(data)
-    getData()
-}
+        let res = await fetch(`https://rm-backend.onrender.com/wishlist`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(obj)
+        })
+        let data = await res.json()
+        console.log(data)
+    }
 
-const wishlistFunc =async(el)=>{
-   let obj = {
-    name:el.name,
-    status:el.status
-   }
-    let res = await fetch(`https://rm-backend.onrender.com/wishlist`,{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        }
-        ,
-        body:JSON.stringify(obj)
-    })
-    let data=await res.json()
-    console.log(data)
-}
+    const handleFilt = async () => {
+        let filt = document.getElementById('filt').value
+        let res = await fetch(`https://rm-backend.onrender.com/todos/?status=${filt}`)
 
-const handleFilt=async()=>{
-let filt=document.getElementById('filt').value
-    let res=await fetch(`https://rm-backend.onrender.com/todos/?status=${filt}`)
+        let data = await res.json()
+        console.log(data)
+        displayData(data)
+    }
 
-    let data=await res.json()
-    console.log(data)
-}
+    const handleASC = async () => {
+        let res = await fetch(`https://rm-backend.onrender.com/todos?_sort=id&_order=asc`)
+        let data = await res.json()
+        displayData(data)
+    }
 
+    const handleDESC = async () => {
+        let res = await fetch(`https://rm-backend.onrender.com/todos?_sort=id&_order=desc`)
+        let data = await res.json()
+        displayData(data)
+    }
 
 //posts?title=json-server
 </script>
