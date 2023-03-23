@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import {  SignUp } from '../Redux/AuthReducer/action'
 
 export const Signup = () => {
@@ -21,6 +22,7 @@ export const Signup = () => {
         e.preventDefault()
         if(password==passwordc){
             dispatch(SignUp(email,username,password,passwordc))
+          
         }else{
             alert('renter the password')
         }
@@ -30,7 +32,7 @@ export const Signup = () => {
   
 
   return (
-    // <div style={{width:'30%' ,border:'2px solid red',margin:'auto',position:"relative",marginTop:"70px"}}>
+     <div >
         <form onSubmit={handleForm} style={{padding:"30px 40px",width:"15%",margin:'auto',backgroundColor:"yellow"} } action="">
             <label htmlFor="">Email</label>
             <br />
@@ -47,6 +49,7 @@ export const Signup = () => {
 
             <input style={{padding:"8px 75px",borderRadius:"7px",backgroundColor:"black",color:'white'}} type="submit" />
         </form>
-    // </div>
+        <Link to="/"><button>Go To Login</button></Link>
+     </div>
   )
 }
