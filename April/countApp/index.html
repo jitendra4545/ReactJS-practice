@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #counter{
+             padding: 20px 40px;
+             line-height: 40px;
+             margin-top: 20px;
+        }
+        #count{
+            color: white;
+        }
+        #cont{
+          justify-content: space-evenly;
+          align-items: center;
+          display: flex;
+          margin-top: 150px;
+
+        }
+        #inc{
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            font-weight: bold;
+ border-radius: 10px;
+ border: none;
+        }
+        #inc:hover{
+            background-color: blue;
+        }
+        #dec{
+            
+            padding: 10px 20px;
+            background-color:red;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            border: none;
+        
+        }
+        #curr{
+            color: blue;
+             
+        }
+        body{
+            background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5kCDE4qB8HeRPtbkt9kjIQy0MvEZSU95dgQnqEcMG&s);
+        }
+        #left{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="counter" >
+        <h1 id="count" >You Read Hanuman Chalisa <span id="curr"></span> Times and <span id="left">180</span> Time left</h1>
+    </div>
+   
+    <div id="cont">
+
+    </div>
+   
+</body>
+</html>
+<script>
+     let getData=async()=>{
+         let res=await fetch(`https://rm-backend.onrender.com/count`)
+         let data=await res.json()
+         console.log(data)
+         appendData(data)
+     }
+     getData()
+     let container=document.getElementById('cont')
+    let x=document.getElementById('curr')
+    let y=document.getElementById('left')
+     const appendData=(data)=>{
+        container.innerHTML=null
+          data.forEach((el)=>{
+             x.innerText=el.value
+             y.innerText=180-el.value
+             let z=document.createElement('button')
+             z.innerText="Increment"
+             z.id='inc'
+             z.addEventListener('click',()=>{
+                incFunc(el.id,el.value)
+            })
+            let a=document.createElement('button')
+             a.innerText="Decrement"
+             a.id='dec'
+             a.addEventListener('click',()=>{
+                decFunc(el.id,el.value)
+            })
+        container.append(a,z)
+          })
+     }
+
+
+const incFunc=async(id,value)=>{
+    //console.log(id,value)
+    let newvalue={value:value+1}
+    console.log(newvalue)
+    let res=await fetch(`https://rm-backend.onrender.com/count/${id}`,{
+      method:"PATCH",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(newvalue)
+    })
+         let data=await res.json()
+         console.log(data)
+        getData()
+}
+
+const decFunc=async(id,value)=>{
+    //console.log(id,value)
+    let newvalue={value:value-1}
+    console.log(newvalue)
+    let res=await fetch(`https://rm-backend.onrender.com/count/${id}`,{
+      method:"PATCH",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(newvalue)
+    })
+         let data=await res.json()
+         console.log(data)
+        getData()
+}
+
+</script>
