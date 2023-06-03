@@ -64,11 +64,11 @@ const handlePrevious=()=>{
 
 const handleChange=(curr,prev)=>{
    setCount(curr)
-   console.log(curr,"22552356723")
+  
 }
 
 
-console.log(Count,Active)
+
 
 
     return (
