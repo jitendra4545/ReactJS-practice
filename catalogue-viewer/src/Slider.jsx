@@ -10,19 +10,24 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
 let images = [{
     url: "https://thumbs.dreamstime.com/b/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg",
-    desc: ""
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently.",
+    name:"Slider 1"
 }, {
     url: "https://media.istockphoto.com/id/1146517111/photo/taj-mahal-mausoleum-in-agra.jpg?s=612x612&w=0&k=20&c=vcIjhwUrNyjoKbGbAQ5sOcEzDUgOfCsm9ySmJ8gNeRk=",
-    desc: ""
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently.",
+    name:"Slider 2"
 }, {
     url: "https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=",
-    desc: ""
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently.",
+    name:"Slider 3"
 }, {
     url: "https://media.istockphoto.com/id/637696304/photo/patan.jpg?s=612x612&w=0&k=20&c=-53aSTGBGoOOqX5aoC3Hs1jhZ527v3Id_xOawHHVPpg=",
-    desc: ""
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently.",
+    name:"Slider 4"
 }, {
     url: "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
-    desc: ""
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently.",
+    name:"Slider 5"
 }]
 
 
@@ -70,7 +75,7 @@ console.log(Count,Active)
 
 <div className='container' >
     <div>
-       <div>
+       <div  >
         <Carousel
          index={Count}
          onChange={handleChange}
@@ -85,20 +90,24 @@ console.log(Count,Active)
         
         >
          { images.map((el,i)=>{
-            return   <img
+            return  <div>
+            
+            <img
             key={i}
-           height={'500px'}
-           width={'600px'}
-          style={{borderRadius:"40px"}}
+            style={{borderRadius:"40px"}}
             src={el.url} 
+            width={"100%"}
+            height={'500px'}
             />
+            </div>
           })}
         </Carousel>
        </div>
     </div>
-    <div>
-    <div>
+    <div style={{boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",borderRadius:'20px'}}  >
+   <div>
         <Carousel
+    
          index={Count}
          onChange={handleChange}
          interval={3000}
@@ -111,15 +120,21 @@ console.log(Count,Active)
          swipe={false}
         >
          { images.map((el,i)=>{
-            return <p>
-            key={i}
-            src={el.name}
+            return<div > <p style={{padding:"20px"}}  key={i}>
+                <span style={{fontSize:"35px", color:"grey",fontWeight:"bold"}} >{el.name}</span>
+                <br />
+                <br />
+            {el.desc}
+            
+            
             </p>
+           
+            </div>
           })}
-        </Carousel>
-       </div>
+        </Carousel> 
+        </div>
     </div>
-    <div style={{display:"flex",justifyContent:"center",alignItems:"center"}} >
+    <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"20px"}} >
    <div>
     <Button onClick={handlePrevious} ><ArrowCircleLeftIcon style={{fontSize:'4rem'}}/></Button>
     </div> 
@@ -141,11 +156,11 @@ console.log(Count,Active)
                     }
                    
                 </div>
-               <div style={{display:'flex',justifyContent:"center",alignItems:'center'}} >
+               <div>
                 <Button onClick={handleNext}><ArrowCircleRightIcon style={{fontSize:'4rem'}}/></Button>
                 </div> 
     </div>
-    <div>
+    <div className='playpause' >
         <Button style={{borderRadius:"20px",backgroundColor:"blue"}} onClick={handleAutoPlay}>{Active?<PauseIcon style={{fontSize:'4rem',color:'white'}}  />:<PlayCircleFilledIcon style={{fontSize:'4rem',color:"white"}} />}</Button>
     </div>
 </div>
@@ -158,26 +173,3 @@ console.log(Count,Active)
 
 
 
-
-// <div>
-// <button onClick={handleAutoPlay}>Play</button>
-//             <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)" }} >
-//                 {/* Slider {images.length} {Count}  {Active ? "Active" : "Deactive"} */}
-
-   
-
-
-              
-   
-
-        
-
-
-//                 <div>
-
-//                 </div>
-
-
-//             </div>
-
-//         </div>
