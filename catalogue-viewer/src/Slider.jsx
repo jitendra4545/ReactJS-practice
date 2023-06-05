@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import  "./slider.css"
-import Carousel from 'react-material-ui-carousel'
+
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import PauseIcon from '@mui/icons-material/Pause';
 import { Button } from '@mui/material';
@@ -35,15 +35,15 @@ export const Slider = () => {
 
     const [Count, setCount] = useState(0)
     const [Active, setActive] = useState(false)
+    const [sliderInt, setSliderInt] = useState(null);
+
+
+
+
 
 
 const handleNext=()=>{
-    if(Count==images.length-1){
-        setCount(0)
-
-    }else{
-        setCount(Count+1)
-    }
+    setCount((prevIndex) => (prevIndex + 1) % images.length)
 }
 
 
@@ -61,15 +61,19 @@ const handlePrevious=()=>{
     }
 }
 
+const handlePlay=()=>{
+    setSliderInt(setInterval(handleNext, 3000));
+   
+}
 
-const handleChange=(curr,prev)=>{
-   setCount(curr)
-  
+const handlePause=()=>{
+   
+    clearInterval(sliderInt);
+    setSliderInt(null);
 }
 
 
-
-console.log(Count)
+console.log("abdbsdhghgds",Count,Active)
 
     return (
 
@@ -130,7 +134,7 @@ console.log(Count)
                 </div> 
     </div>
     <div className='playpause' >
-{Active ?   <Button style={{borderRadius:"20px",backgroundColor:"blue"}} onClick={handleAutoPlay}><PauseIcon  style={{fontSize:'4rem',color:"white"}} /></Button> : <Button style={{borderRadius:"20px",backgroundColor:"blue"}} onClick={handleAutoPlay}><PlayCircleFilledIcon style={{fontSize:'4rem',color:'white'}}  /></Button>}
+{Active ?   <Button style={{borderRadius:"20px",backgroundColor:"blue"}} onClick={handleAutoPlay}><PauseIcon onClick={handlePause}  style={{fontSize:'4rem',color:"white"}} /></Button> : <Button style={{borderRadius:"20px",backgroundColor:"blue"}} onClick={handleAutoPlay}><PlayCircleFilledIcon onClick={handlePlay} style={{fontSize:'4rem',color:'white'}}  /></Button>}
 
       
     </div>
