@@ -69,69 +69,38 @@ const handleChange=(curr,prev)=>{
 
 
 
-
+console.log(Count)
 
     return (
 
 <div className='container' >
     <div>
        <div  >
-        <Carousel
-         index={Count}
-         onChange={handleChange}
-         interval={3000}
-         duration={500}
-         autoPlay={Active} 
-         animation="slide"
-         indicators={false}
-         navButtonsAlwaysInvisible={true}
-         stopAutoPlayOnHover
-         swipe={false}
         
-        >
-         { images.map((el,i)=>{
-            return  <div>
-            
+       
             <img
-            key={i}
+           
             style={{borderRadius:"40px"}}
-            src={el.url} 
+            src={images[Count].url} 
             width={"100%"}
             height={'500px'}
             />
-            </div>
-          })}
-        </Carousel>
+         
        </div>
     </div>
     <div style={{boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",borderRadius:'20px'}}  >
    <div>
-        <Carousel
-    
-         index={Count}
-         onChange={handleChange}
-         interval={3000}
-         duration={500}
-         autoPlay={Active} 
-         animation="slide"
-         indicators={false}
-         navButtonsAlwaysInvisible={true}
-         stopAutoPlayOnHover
-         swipe={false}
-        >
-         { images.map((el,i)=>{
-            return<div > <p style={{padding:"20px"}}  key={i}>
-                <span style={{fontSize:"35px", color:"grey",fontWeight:"bold"}} >{el.name}</span>
+    <div > <p style={{padding:"20px"}} >
+                <span style={{fontSize:"35px", color:"grey",fontWeight:"bold"}} >{images[Count].name}</span>
                 <br />
                 <br />
-            {el.desc}
+            {images[Count].desc}
             
             
             </p>
            
             </div>
-          })}
-        </Carousel> 
+         
         </div>
     </div>
     <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"20px"}} >
@@ -161,7 +130,9 @@ const handleChange=(curr,prev)=>{
                 </div> 
     </div>
     <div className='playpause' >
-        <Button style={{borderRadius:"20px",backgroundColor:"blue"}} onClick={handleAutoPlay}>{Active?<PauseIcon style={{fontSize:'4rem',color:'white'}}  />:<PlayCircleFilledIcon style={{fontSize:'4rem',color:"white"}} />}</Button>
+{Active ?   <Button style={{borderRadius:"20px",backgroundColor:"blue"}} onClick={handleAutoPlay}><PauseIcon  style={{fontSize:'4rem',color:"white"}} /></Button> : <Button style={{borderRadius:"20px",backgroundColor:"blue"}} onClick={handleAutoPlay}><PlayCircleFilledIcon style={{fontSize:'4rem',color:'white'}}  /></Button>}
+
+      
     </div>
 </div>
         
